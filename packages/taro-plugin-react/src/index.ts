@@ -1,6 +1,5 @@
 import { fs, REG_TARO_H5 } from '@tarojs/helper'
 import { isString } from '@tarojs/shared'
-import { capitalize, internalComponents, toCamelCase } from '@tarojs/shared/dist/template'
 
 import { h5iVitePlugin } from './vite.h5'
 import { harmonyVitePlugin } from './vite.harmony'
@@ -12,15 +11,9 @@ import { modifyMiniWebpackChain } from './webpack.mini'
 import type { esbuild } from '@tarojs/helper'
 import type { IPluginContext } from '@tarojs/service'
 import type { IProjectConfig } from '@tarojs/taro/types/compile'
-import type { IComponentConfig } from '@tarojs/taro/types/compile/hooks'
 import type { PluginOption } from 'vite'
 
 export type Frameworks = 'react' | 'preact' | 'nerv'
-
-interface OnParseCreateElementArgs {
-  nodeName: string
-  componentConfig: IComponentConfig
-}
 
 export function isReactLike(framework: IProjectConfig['framework'] = 'react'): framework is Frameworks {
   return ['react', 'preact', 'nerv'].includes(framework)
@@ -107,12 +100,6 @@ export default (ctx: IPluginContext) => {
     }
   })
 
-  // 映射、收集使用到的小程序组件
-  ctx.onParseCreateElement(({ nodeName, componentConfig }: OnParseCreateElementArgs) => {
-    if (capitalize(toCamelCase(nodeName)) in internalComponents) {
-      componentConfig.includes.add(nodeName)
-    }
-  })
 }
 
 function setAlias (framework: Frameworks, chain) {
