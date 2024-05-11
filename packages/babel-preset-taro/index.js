@@ -77,7 +77,7 @@ module.exports = (_, options = {}) => {
       })
     }
     presets.push([
-      require('babel-plugin-transform-solid-jsx-ad-taro-components'),
+      require('babel-plugin-transform-solid-jsx'),
       solidOptions,
     ])
   }
