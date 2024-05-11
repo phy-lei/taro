@@ -77,8 +77,12 @@ module.exports = (_, options = {}) => {
       })
     }
     presets.push([
-      require('babel-plugin-transform-solid-jsx-ad-taro-components'),
-      solidOptions,
+      require('babel-plugin-transform-solid-jsx'),
+      {
+        moduleName: '@tarojs/plugin-framework-react/dist/reconciler',
+        generate: 'universal',
+        uniqueTransform: process.env.TARO_PLATFORM !== 'web',
+      },
     ])
   }
 
