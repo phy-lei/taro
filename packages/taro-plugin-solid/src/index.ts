@@ -14,7 +14,7 @@ import type { PluginOption } from 'vite'
 
 export const RECONCILER_NAME = '@tarojs/plugin-framework-solid/dist/reconciler'
 
-interface OnParseCreateElementArgs {
+interface IParseCreateElementArgs {
   nodeName: string
   componentConfig: IComponentConfig
 }
@@ -25,7 +25,6 @@ export default (ctx: IPluginContext) => {
   if (framework !== 'solid') return
 
   ctx.modifyWebpackChain(({ chain }) => {
-
     chain.plugin('definePlugin').tap((args) => {
       const config = args[0]
       config.__TARO_FRAMEWORK__ = `"${framework}"`
@@ -102,7 +101,7 @@ export default (ctx: IPluginContext) => {
   })
 
   // 映射、收集使用到的小程序组件
-  ctx.onParseCreateElement(({ nodeName, componentConfig }: OnParseCreateElementArgs) => {
+  ctx.onParseCreateElement(({ nodeName, componentConfig }: IParseCreateElementArgs) => {
     if (capitalize(toCamelCase(nodeName)) in internalComponents) {
       componentConfig.includes.add(nodeName)
     }
