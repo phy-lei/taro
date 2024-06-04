@@ -1,6 +1,6 @@
 {
   "name": "@tarojs/components",
-  "version": "4.0.0-beta.61",
+  "version": "4.0.0-beta.63",
   "description": "Taro 组件库",
   "browser": "dist/index.js",
   "main:h5": "dist/index.js",
@@ -27,11 +27,12 @@
     "prebuild": "run-p generate:*",
     "build": "cross-env NODE_ENV=production run-s build:components build:library",
     "build:components": "stencil build",
-    "build:library": "pnpm --filter @tarojs/components-library-react --filter @tarojs/components-library-vue2 --filter @tarojs/components-library-vue3 run build:ci",
+    "build:library": "pnpm --filter @tarojs/components-library-react --filter @tarojs/components-library-vue2 --filter @tarojs/components-library-vue3 --filter @tarojs/components-library-solid run build:ci",
     "dev:components": "cross-env NODE_ENV=development pnpm run build:components --watch",
     "dev:library-react": "cross-env NODE_ENV=development pnpm --filter @tarojs/components-library-react run dev",
     "dev:library-vue2": "cross-env NODE_ENV=development pnpm --filter @tarojs/components-library-vue2 run dev",
     "dev:library-vue3": "cross-env NODE_ENV=development pnpm --filter @tarojs/components-library-vue3 run dev",
+    "dev:library-solid": "cross-env NODE_ENV=development pnpm --filter @tarojs/components-library-solid run dev",
     "generate:lib": "mkdirp lib",
     "generate:stencil-config": "esbuild ./scripts/stencil/stencil.config.ts --external:lightningcss --bundle --platform=node --outfile=stencil.config.js",
     "sync:types": "pnpm run tsx --files scripts/json-schema-to-types.ts",
@@ -55,8 +56,8 @@
     "classnames": "^2.2.5",
     "hls.js": "^1.1.5",
     "resolve-pathname": "^3.0.0",
-    "tslib": "^2.6.2",
-    "swiper": "6.8.0"
+    "swiper": "6.8.0",
+    "tslib": "^2.6.2"
   },
   "devDependencies": {
     "@babel/generator": "^7.21.4",
@@ -73,6 +74,7 @@
     "lightningcss": "^1.22.1",
     "lodash": "^4.17.21",
     "miniapp-types": "1.6.0",
+    "mkdirp": "^1.0.4",
     "puppeteer": "^19.2.0",
     "rollup": "^3.8.1",
     "rollup-plugin-node-externals": "^5.0.0",
@@ -80,8 +82,7 @@
     "stencil-vue2-output-target": "0.0.4",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^3.14.1",
-    "typescript": "^5.3.3",
-    "mkdirp": "^1.0.4"
+    "typescript": "^5.3.3"
   },
   "peerDependenciesMeta": {
     "@types/react": {
