@@ -1,12 +1,27 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { babel } from '@rollup/plugin-babel'
+import cjs from '@rollup/plugin-commonjs'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
 import ts from '@rollup/plugin-typescript'
 import { defineConfig } from 'rollup'
 import externals from 'rollup-plugin-node-externals'
 
 import type { RollupOptions } from 'rollup'
 
+const extensions = ['.js', '.ts', '.json', '.tsx', '.jsx']
+
+const external = [
+  '@babel/core',
+  '@babel/preset-typescript',
+  'babel-plugin-transform-solid-jsx',
+  'solid-refresh',
+  'solid-refresh/babel',
+  'merge-anything',
+  'vitefu',
+  'vite'
+]
 const __filename = fileURLToPath(new URL(import.meta.url))
 const cwd = path.dirname(__filename)
 
@@ -66,9 +81,35 @@ const loaderConfig: RollupOptions = {
   ...base
 }
 
+// vite-plugin-solid
+const viteSolidPluginConfig: RollupOptions = {
+  input: path.join(cwd, 'src/plugin/vite-plugin-solid.ts'),
+  output: [
+    {
+      file: 'dist/plugin/vite-plugin-solid.js',
+      format: 'es',
+      sourcemap: true,
+    },
+  ],
+  external,
+  plugins: [
+    babel({
+      extensions,
+      babelHelpers: 'bundled',
+      presets: [
+        ['@babel/preset-env', { targets: { node: 'current' } }],
+        '@babel/preset-typescript',
+      ],
+    }),
+    nodeResolve({ extensions, preferBuiltins: true, browser: false }),
+    cjs({ extensions }),
+  ],
+}
+
 export default defineConfig([
   compileConfig,
   loaderConfig,
   reconcilerConfig,
   runtimeConfig,
+  viteSolidPluginConfig,
 ])

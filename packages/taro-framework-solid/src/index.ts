@@ -2,6 +2,7 @@ import { fs, REG_TARO_H5 } from '@tarojs/helper'
 import { capitalize, internalComponents, isString, toCamelCase } from '@tarojs/shared'
 
 import { RECONCILER_NAME } from './constant'
+import solidPlugin from './plugin/vite-plugin-solid'
 import { h5iVitePlugin } from './vite.h5'
 import { harmonyVitePlugin } from './vite.harmony'
 import { miniVitePlugin } from './vite.mini'
@@ -82,7 +83,6 @@ export default (ctx: IPluginContext) => {
       esbuildConfig.plugins ||= []
       esbuildConfig.plugins.push(taroSolidPlugin)
     } else if (compiler.type === 'vite') {
-      const solidPlugin = require('vite-plugin-solid')
       compiler.vitePlugins ||= []
       const solidOptions = {}
       if (process.env.TARO_PLATFORM === 'web') {
@@ -100,17 +100,9 @@ export default (ctx: IPluginContext) => {
         // 小程序
         compiler.vitePlugins.push(miniVitePlugin(ctx))
       }
-      // @TODO vite的插件需要内部删除babel-preset-solid
-      compiler.vitePlugins.unshift(solidPlugin({
-        babel: {
-          presets: [
-            [
-              require('babel-plugin-transform-solid-jsx'),
-              solidOptions
-            ],
-          ],
-        },
-      }))
+      compiler.vitePlugins.unshift([solidPlugin({
+        solid: solidOptions
+      })])
     }
   })
 

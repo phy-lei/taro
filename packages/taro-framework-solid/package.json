@@ -38,26 +38,27 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.5",
+    "@rollup/plugin-commonjs": "^25.0.7",
     "@tarojs/runtime": "workspace:*",
-    "@tarojs/taro": "workspace:*",
     "@tarojs/shared": "workspace:*",
-    "webpack-chain": "^6.5.1",
+    "@tarojs/taro": "workspace:*",
+    "babel-plugin-transform-solid-jsx": "workspace:*",
     "esbuild": "~0.19.5",
+    "merge-anything": "^5.1.7",
     "solid-js": "^1.8.16",
+    "solid-refresh": "^0.6.3",
     "typescript": "^5.3.3",
-    "vite": "^4.2.0"
+    "vite": "^4.2.0",
+    "vitefu": "^0.2.5",
+    "webpack-chain": "^6.5.1"
   },
   "peerDependencies": {
     "@tarojs/runtime": "workspace:~",
     "@tarojs/shared": "workspace:~",
-    "vite-plugin-solid": "^2",
-    "webpack": "^5",
-    "solid-js": ">=1"
+    "solid-js": ">=1",
+    "webpack": "^5"
   },
   "peerDependenciesMeta": {
-    "vite-plugin-solid": {
-      "optional": true
-    },
     "webpack": {
       "optional": true
     },
