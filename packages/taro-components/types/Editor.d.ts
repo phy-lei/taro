@@ -67,7 +67,7 @@ declare namespace EditorProps {
  *
  * *编辑器内支持部分 HTML 标签和内联样式，不支持 **class** 和 **id***
  * @classification forms
- * @supported weapp
+ * @supported weapp, jd
  * @example_react
  * ```tsx
  * class App extends Components {

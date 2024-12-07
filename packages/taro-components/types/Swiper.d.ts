@@ -141,6 +141,10 @@ interface SwiperProps extends StandardProps {
    * @supported swan
    */
   disableTouchmove?: string
+  /** swiper11 相关的动效参数，具体见文档 https://swiperjs.com/swiper-api#parameters
+   * @supported h5
+   */
+  effectsProps?: Record<string, any>
   /** 改变 current 时使用动画过渡
    * @supported weapp
    * @default true
@@ -151,10 +155,6 @@ interface SwiperProps extends StandardProps {
    * @default 0
    */
   cacheExtent?: number
-  /** swiper11 相关的动效参数，具体见文档 https://swiperjs.com/swiper-api#parameters
-   * @supported h5
-  */
-  effectsProps?: Record<string, any>
   /** current 改变时会触发 change 事件
    * @supported weapp, alipay, swan, tt, qq, jd, h5, rn, harmony, harmony_hybrid
    */

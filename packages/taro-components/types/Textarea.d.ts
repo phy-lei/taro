@@ -128,6 +128,10 @@ interface TextareaProps extends StandardProps, FormItemProps {
    * @default false
    */
   adjustKeyboardTo?: boolean
+  /** 需传入对象，格式为 { fontSize: number, fontWeight: string, color: string }
+   * @supported weapp, alipay, swan, tt, qq, jd
+   */
+  placeholderStyle?: string
   /** 输入框聚焦时触发
    * @supported weapp, alipay, swan, tt, qq, jd, h5, rn, harmony, harmony_hybrid
    */
