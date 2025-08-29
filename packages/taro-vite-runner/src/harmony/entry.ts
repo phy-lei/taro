@@ -64,7 +64,7 @@ export default function (viteCompilerContext: ViteHarmonyCompilerContext): Plugi
             this.emitFile({
               type: 'chunk',
               id: page.scriptPath,
-              fileName: viteCompilerContext.getScriptPath(page.name + TARO_COMP_SUFFIX),
+              fileName: viteCompilerContext.getScriptPath(page.name + '/index' + TARO_COMP_SUFFIX),
               implicitlyLoadedAfterOneOf: [rawId]
             })
             await this.load({
@@ -128,14 +128,14 @@ export default function (viteCompilerContext: ViteHarmonyCompilerContext): Plugi
         this.emitFile({
           type: 'prebuilt-chunk',
           fileName: viteCompilerContext.getTargetFilePath(app.name, '.ets'),
-          code: parse.parse(rawId, name, this.resolve),
+          code: parse.parse(rawId, app, this.resolve),
           exports: ['default'],
         })
         await this.load({
           id: rawId,
           resolveDependencies: true
         })
-        return parse.parseEntry(rawId, appConfig)
+        return parse.parseEntry(rawId, app)
       }
     },
     buildEnd () {
